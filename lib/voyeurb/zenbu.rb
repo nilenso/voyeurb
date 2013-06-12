@@ -22,12 +22,13 @@ class Zenbu
 
   def add(obj)
     puts "made a #{obj.class} with id #{obj.object_id}"
-    @all[obj.object_id] = obj
+    @all[obj.object_id] = obj.class.to_s
     obj
   end
 
   def remove(id)
-    puts "destroyed a #{@all[id].class} with id #{id}"
-    @all.delete(id).tap
+    #puts "Object #{id} dying " #at #{Time.new}"
+    puts "destroyed a #{@all[id]} with id #{id}"
+    @all.delete(id)
   end
 end

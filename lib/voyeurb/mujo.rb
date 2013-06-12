@@ -4,21 +4,26 @@
 class BasicObject
 
   class << self
-    # def voyeur_new(*args)
-    #   puts "making a #{self} with #{args}"
-    #   newb(*args)
-    # end
-
     def voyeur_new(*args, &block)
       return newb(*args, &block) if self == Zenbu
       obj = self.allocate
       obj.send :initialize, *args, &block
-      Zenbu.add(obj)
+      track(obj)
       obj
     end
-    puts "overwriting new"
+
     alias :newb :new
     alias :new :voyeur_new
+
+    def track(obj)
+      ObjectSpace.define_finalizer(self,
+                                   self.class.method(:finalize).to_proc)
+      Zenbu.add(obj)
+    end
+
+    def finalize(id)
+      Zenbu.remove(id)
+    end
   end
 
 end
