@@ -1,3 +1,5 @@
+$LOAD_PATH << File.dirname(__FILE__)
 
-require 'voyeurb/mujo.rb'
+require 'voyeurb/zenbu'
+require 'voyeurb/mujo'
 
