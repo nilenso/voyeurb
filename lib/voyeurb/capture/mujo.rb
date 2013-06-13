@@ -3,12 +3,12 @@
 
 class BasicObject
 
-  UNTRACKABLES = [::Zenbu, ::Shunkan]
+  UNTRACKABLES = [::Capture::Zenbu, ::Capture::Shunkan]
 
   def track
     finalizer = self.class.method(:finalize).to_proc
     ::ObjectSpace.define_finalizer(self, finalizer)
-    ::Zenbu.add(self)
+    ::Capture::Zenbu.add(self)
   end
 
   class << self
@@ -29,7 +29,7 @@ class BasicObject
     end
 
     def finalize(object_id)
-      Zenbu.remove(object_id)
+      ::Capture::Zenbu.remove(object_id)
     end
   end
 

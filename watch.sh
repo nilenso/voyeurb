@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
-rp5 run lib/voyeurb/bijon.rb
+rp5 run lib/voyeurb/watch/watch.rb
 

@@ -27,3 +27,10 @@ This crap is written in ruby 2.0. Processing is JRuby. Have both.
      DEBUG=true ./watch.sh
 
 ...for less multithreading.
+
+TODO
+====
+
+- capture a camping request/response
+- render objects on a curve
+
