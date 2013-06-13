@@ -18,3 +18,12 @@ Setup
     bundle
     ./capture.sh
     ./watch.sh
+
+Hacking
+=======
+
+This crap is written in ruby 2.0. Processing is JRuby. Have both.
+
+     DEBUG=true ./watch.sh
+
+...for less multithreading.

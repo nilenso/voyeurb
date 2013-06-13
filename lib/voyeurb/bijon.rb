@@ -11,6 +11,9 @@ require "hassei"
 
 class Bijon < Processing::App
 
+  WIDTH = 800
+  HEIGHT = 600
+
   def setup
     alpha = 0.5
     @background = [0.06, 0.03, 0.18, alpha]
@@ -27,14 +30,23 @@ class Bijon < Processing::App
   def draw
     draw_background
     fill(204, 102, 0)
-    ellipse(50, 75, 32, 32)
+    draw_population
+  end
+
+  def draw_population
+    return unless @population
+    @population.values.each do |obj|
+      obj.move
+      ellipse(obj.x, obj.y, 32, 32)
+    end
   end
 
   # voyeurb stuff:
 
   def replay(file)
-    @events = Hassei.recreate_from(file || "out.txt")
-    @population = []
+    @events = Hassei.recreate_from(file || "out.txt",
+                                   Bijon::WIDTH, Bijon::HEIGHT)
+    @population = {}
     @timers = Timers.new
     schedule_next
   end
@@ -44,29 +56,28 @@ class Bijon < Processing::App
     return unless next_event
     puts "next event in #{next_event.at} seconds."
     @timers.after(next_event.at) { fire(next_event) }
+    wait
+  end
+
+  def wait
+    return @timers.wait if ENV["DEBUG"]
     Thread.new { @timers.wait }
   end
 
   def fire(event)
-    @population << event
+    if event.died?
+      @population[event.object_id].kill
+    else
+      @population[event.object_id] = event
+    end
 #    p @population
     schedule_next
   end
 
-  # TODO:
-  # x) create an "object space"
-  # x) read in all the events
-  # x) subtract start time from the rest
-  # x) set a timer for first event
-  # x) on timer fire:
-  # x  - change state of object space
-  # x  - set next timer
-  # 5) draw should move alive objects up, dead objects down
-
 end
 
-bijon = Bijon.new(:width => 800, 
-                  :height => 600, 
+bijon = Bijon.new(:width => Bijon::WIDTH,
+                  :height => Bijon::HEIGHT, 
                   :title => "voyeurb", 
                   :full_screen => false)
 bijon.replay(ARGV[0])
