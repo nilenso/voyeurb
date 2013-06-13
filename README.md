@@ -3,6 +3,13 @@ voyeurb
 
 Watch your objects.
 
+Intro
+=====
+
+Voyeurb can be added to your program to visualize the birth and death of your objects.
+
+The classes in voyeurb are given Japanese names so they are less likely to conflict with your class names, since voyeurb's class names are excluded from analysis. Sorry if this is too cute.
+
 Setup
 =====
 
