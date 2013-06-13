@@ -5,6 +5,16 @@
 
 class Bijon < Processing::App
 
+  # TODO:
+  # 0) create an "object space"
+  # 1) read in all the events
+  # 2) subtract start time from the rest
+  # 3) set a timer for first event
+  # 4) on timer fire:
+  #    - change state of object space
+  #    - set next timer
+  # 5) draw should move alive objects up, dead objects down
+
   def setup
     alpha = 0.5
     @background = [0.06, 0.03, 0.18, alpha]

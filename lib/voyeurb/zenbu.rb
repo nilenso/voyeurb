@@ -21,13 +21,13 @@ class Zenbu
   end
 
   def add(obj)
-    puts "#{Shunkan.new}:BORN:#{obj.class}:#{obj.object_id}"
+    puts "#{Shunkan.new.usec}:BORN:#{obj.class}:#{obj.object_id}"
     @all[obj.object_id] = obj.class.to_s
     obj
   end
 
   def remove(id)
-    puts "#{Shunkan.new}:DIED:#{@all[id]}:#{id}"
+    puts "#{Shunkan.new.usec}:DIED:#{@all[id]}:#{id}"
     @all.delete(id)
   end
 end
