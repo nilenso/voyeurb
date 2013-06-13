@@ -1,7 +1,7 @@
 require './lib/voyeurb'
 
 class Zig
-  def z; puts "hi"; end
+  def z; "hi"; end
 end
 
 #puts Zig.ancestors

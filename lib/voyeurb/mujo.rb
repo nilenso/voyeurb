@@ -3,15 +3,17 @@
 
 class BasicObject
 
+  UNTRACKABLES = [::Zenbu, ::Shunkan]
+
   def track
-    ::ObjectSpace.define_finalizer(self,
-                                   self.class.method(:finalize).to_proc)
+    finalizer = self.class.method(:finalize).to_proc
+    ::ObjectSpace.define_finalizer(self, finalizer)
     ::Zenbu.add(self)
   end
 
   class << self
     def voyeur_new(*args, &block)
-      return newb(*args, &block) if self == Zenbu
+      return newb(*args, &block) unless trackable
       obj = self.allocate
       obj.send :initialize, *args, &block
       obj.send :track
@@ -20,6 +22,11 @@ class BasicObject
 
     alias :newb :new
     alias :new :voyeur_new
+
+    def trackable
+      return false if UNTRACKABLES.include?(self)
+      true
+    end
 
     def finalize(object_id)
       Zenbu.remove(object_id)

@@ -21,15 +21,13 @@ class Zenbu
   end
 
   def add(obj)
-    puts "BORN:#{obj.class}:#{obj.object_id}"
+    puts "#{Shunkan.new}:BORN:#{obj.class}:#{obj.object_id}"
     @all[obj.object_id] = obj.class.to_s
     obj
   end
 
   def remove(id)
-    # TODO: wrap Time so mujo doesn't track it
-    #puts "Object #{id} dying " #at #{Time.new}"
-    puts "DIED:#{@all[id]}:#{id}"
+    puts "#{Shunkan.new}:DIED:#{@all[id]}:#{id}"
     @all.delete(id)
   end
 end
