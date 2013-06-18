@@ -16,6 +16,7 @@ class Hassei
     @height = height
     @x = 0
     @y = 0
+    @calling = false
   end
 
   def y
@@ -45,6 +46,15 @@ class Hassei
     @y = @y - 1
   end
 
+  # TODO: events / objects / methods need to be separated.
+  def call_method(name)
+    @calling = true
+  end
+
+  def calling?
+    @calling
+  end
+
   def normalize(epoch)
     magic_speedup = 100
     not_zero = 0.1
@@ -62,6 +72,10 @@ class Hassei
 
   def died?
     @what == "DIED"
+  end
+
+  def called?
+    @what == "CALL"
   end
 
   def self.recreate_from(file, width, height)

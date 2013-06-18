@@ -32,5 +32,11 @@ TODO
 ====
 
 - capture a camping request/response
-- render objects on a curve
+- draw class names over figures
+- method calls should:
+  - flash
+  - display method name
+- render objects
+  - born = up
+  - died = down
 

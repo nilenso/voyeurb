@@ -9,4 +9,3 @@ bijon = ::Watch::Bijon.new(:width => Watch::Bijon::WIDTH,
 
 bijon.replay(ARGV[0])
 
-displayHeight = 0

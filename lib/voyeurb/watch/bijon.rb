@@ -1,4 +1,3 @@
-
 # bijon => vision
 # Processing: http://processing.org/reference/index.html
 # Ruby-Processing: https://github.com/jashkenas/ruby-processing/wiki
@@ -38,7 +37,8 @@ module Watch
       return unless @population
       @population.values.each do |obj|
         obj.move
-        ellipse(obj.x, obj.y, 32, 32)
+        rect(obj.x, obj.y, 16, 16) if obj.calling?
+        ellipse(obj.x, obj.y, 32, 32) unless obj.calling?
       end
     end
 
@@ -68,12 +68,13 @@ module Watch
     def fire(event)
       if event.died?
         @population[event.object_id].kill
+      elsif event.called?
+        @population[event.object_id].call_method(event.class) #actually, method.
       else
         @population[event.object_id] = event
       end
       #    p @population
       schedule_next
     end
-
   end
 end

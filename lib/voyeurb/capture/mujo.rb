@@ -1,14 +1,13 @@
-
 # mujo => impermanence
 
 class BasicObject
-
   UNTRACKABLES = [::Capture::Zenbu, ::Capture::Shunkan]
 
   def track
     finalizer = self.class.method(:finalize).to_proc
     ::ObjectSpace.define_finalizer(self, finalizer)
     ::Capture::Zenbu.add(self)
+    ::Capture::Zenbu.track_methods(self, self.public_methods(false))
   end
 
   class << self
@@ -32,5 +31,4 @@ class BasicObject
       ::Capture::Zenbu.remove(object_id)
     end
   end
-
 end
