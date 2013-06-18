@@ -32,6 +32,11 @@ TODO
 ====
 
 - capture a camping request/response
+  x capture birth/death
+  - capture method calls
+  - whitelist api
+  - change delimiter from `:'
+- watch should ignore non-events
 - draw class names over figures
 - method calls should:
   - flash
