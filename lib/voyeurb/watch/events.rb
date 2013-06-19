@@ -8,6 +8,13 @@ module Watch
       schedule_next
     end
 
+    def self.create_from(file, &block)
+      events = normalize(parse_file(file))
+      Events.new(events, &block)
+    end
+
+    private
+
     def schedule_next
       next_event = @events.delete_at(0)
       return unless next_event
@@ -27,14 +34,17 @@ module Watch
       schedule_next
     end
 
-    def self.create_from(file, &block)
+    def self.parse_file(file)
       events = []
       File.open(file) do |f|
         f.each {|line| events << Event.new(line) }
       end
+      events
+    end
+
+    def self.normalize(events)
       epoch = events[0].at
       events.map {|e| e.normalize(epoch) }
-      Events.new(events, &block)
     end
 
   end
