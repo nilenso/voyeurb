@@ -29,9 +29,7 @@ module Watch
     end
 
     def fire(event)
-      p event
       @callback.call(event)
-      #    p @population
       schedule_next
     end
 
@@ -40,7 +38,7 @@ module Watch
       File.open(file) do |f|
         f.each {|line| events << Event.from(line) }
       end
-      events
+      events.compact
     end
 
     def self.normalize(events)

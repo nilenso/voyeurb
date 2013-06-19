@@ -31,12 +31,12 @@ This crap is written in ruby 2.0. Processing is JRuby. Have both.
 TODO
 ====
 
-- capture a camping request/response
+x capture a camping request/response
   x capture birth/death
   x capture method calls
   x whitelist api
-  - change delimiter from `:'
-- watch should ignore non-events
+  x change delimiter from `:'
+x watch should ignore non-events
 - draw class names over figures
 - method calls should:
   - flash

@@ -3,7 +3,7 @@
 BINDING = self
 
 module Capture
-  @init = lambda {|whitelist|
+  @init = lambda {
     class ::BasicObject
       UNTRACKABLES = [::Capture::Zenbu,
         ::Capture::Shunkan,
@@ -17,7 +17,9 @@ module Capture
         finalizer = self.class.method(:finalize).to_proc
         ::ObjectSpace.define_finalizer(self, finalizer)
         ::Capture::Zenbu.add(self)
-        ::Capture::Zenbu.track_methods(self, self.public_methods(false))
+        if ::Capture.capture_methods?
+          ::Capture::Zenbu.track_methods(self, self.public_methods(false))
+        end
       end
 
       class << self
@@ -34,7 +36,7 @@ module Capture
 
         def trackable
           return false if UNTRACKABLES.include?(self)
-          return false unless Capture.whitelist.include?(self)
+          return false unless Capture.whitelisted?(self)
           true
         end
 
@@ -45,12 +47,32 @@ module Capture
     end
   }
 
+  def self.capture_methods!
+    @capture_methods = true
+    self
+  end
+
   def self.start(*whitelist)
     @whitelist = whitelist
-    @init.call(whitelist)
+    @init.call
+  end
+
+  def self.start_firehose
+    @whitelist = []
+    @whitelist_all = true
+    @init.call
+  end
+
+  def self.capture_methods?
+    @capture_methods
+  end
+
+  def self.whitelisted?(klass)
+    whitelist.include?(klass) || @whitelist_all
   end
 
   def self.whitelist
     @whitelist.map {|sym| BINDING.class.const_get(sym) }
   end
+
 end

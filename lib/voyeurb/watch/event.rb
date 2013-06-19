@@ -1,5 +1,7 @@
 module Watch
   class Event
+    MARKER = "VOYEURB~"
+
     attr_accessor :at, :what, :class, :obj_id, :x
 
     def initialize(at, what, name, obj_id)
@@ -10,7 +12,8 @@ module Watch
     end
 
     def self.from(line)
-      parts = line.strip.split(":")
+      return unless line.start_with?(MARKER)
+      parts = line.gsub(MARKER, "").strip.split("~")
       at = parts[0].to_i # microseconds
       what = parts[1]    # BORN or DIED
       name = parts[2]

@@ -1,4 +1,4 @@
-require './lib/voyeurb'
+require_relative '../lib/voyeurb'
 
 Capture.start("Zig", "Foo")
 
