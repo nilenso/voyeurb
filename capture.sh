@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
-ruby example.rb > out.txt
+ruby examples/example.rb > out.txt
 

@@ -10,6 +10,7 @@ module Watch
       move_up
       board.fill(204, 102, 0)
       board.ellipse(draw_x, draw_y, 32, 32)
+      self
     end
 
     def move_up

@@ -34,16 +34,15 @@ module Capture
     end
 
     def track_method(obj, method)
-      unless obj.class == "Class"
-        obj.class.class_eval do
-          original_method = "orig_#{method}"
-          new_method = "#{method}"
-          alias_method original_method, new_method
-          define_method(new_method) do
-            now = Capture::Shunkan.new.usec
-            puts "#{now}:CALL:#{new_method}:#{obj.object_id}"
-            obj.send(original_method)
-          end
+      return if obj.is_a?(Class)
+      obj.class.class_eval do
+        original_method = "orig_#{method}"
+        new_method = "#{method}"
+        alias_method original_method, new_method
+        define_method(new_method) do
+          now = Capture::Shunkan.new.usec
+          puts "#{now}:CALL:#{new_method}:#{obj.object_id}"
+          obj.send(original_method)
         end
       end
     end

@@ -18,12 +18,12 @@ end
 zig = Zig.new
 zig.z
 String.new("steve")
-a = "christine"
-b = 123.45
-zig.z
-f = Foo.new
-String.new("bleh")
-f.game
-String.new("bleh")
-String.new("bleh")
-f.lame
+# a = "christine"
+# b = 123.45
+# zig.z
+# f = Foo.new
+# String.new("bleh")
+# f.game
+# String.new("bleh")
+# String.new("bleh")
+# f.lame

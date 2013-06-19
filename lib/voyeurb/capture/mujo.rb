@@ -8,7 +8,7 @@ class BasicObject
     finalizer = self.class.method(:finalize).to_proc
     ::ObjectSpace.define_finalizer(self, finalizer)
     ::Capture::Zenbu.add(self)
-    # ::Capture::Zenbu.track_methods(self, self.public_methods(false))
+    ::Capture::Zenbu.track_methods(self, self.public_methods(false))
   end
 
   class << self

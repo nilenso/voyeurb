@@ -10,6 +10,7 @@ module Watch
       move_down
       board.fill(64, 64, 64)
       board.ellipse(draw_x, draw_y, 32, 32)
+      self
     end
 
     def move_down
