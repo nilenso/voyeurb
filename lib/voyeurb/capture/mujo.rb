@@ -18,7 +18,7 @@ module Capture
         ::ObjectSpace.define_finalizer(self, finalizer)
         ::Capture::Zenbu.add(self)
         if ::Capture.capture_methods?
-          ::Capture::Zenbu.track_methods(self, self.public_methods(false))
+#          ::Capture::Zenbu.track_methods(self, self.public_methods(false))
         end
       end
 
