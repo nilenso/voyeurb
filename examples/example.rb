@@ -1,5 +1,7 @@
 require './lib/voyeurb'
 
+Capture.start("Zig", "Foo")
+
 class Zig
   def z; "hi"; end
 end

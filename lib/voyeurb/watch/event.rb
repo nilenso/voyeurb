@@ -15,14 +15,7 @@ module Watch
       what = parts[1]    # BORN or DIED
       name = parts[2]
       obj_id = parts[3]
-      case what
-      when "BORN"
-        BornEvent.new(at, what, name, obj_id)
-      when "CALL"
-        CallEvent.new(at, what, name, obj_id)
-      when "DIED"
-        DiedEvent.new(at, what, name, obj_id)
-      end
+      Event.new(at, what, name, obj_id)
     end
 
     def normalize(epoch)

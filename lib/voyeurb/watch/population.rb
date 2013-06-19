@@ -6,17 +6,15 @@ module Watch
     end
 
     def alter(event)
-      # TODO: change to state machine instead
-      old_obj = @objs[event.obj_id]
-      new_obj = event.to_obj(old_obj)
-      @objs[event.obj_id] = new_obj
+      old = @objs[event.obj_id] || NewObj.new(event.obj_id)
+      @objs[old.obj_id] = old.on(event)
     end
 
     def each(&block)
       @objs.values.each(&block)
     end
 
-    def replace(next_state)
+    def update(next_state)
       @objs[next_state.obj_id] = next_state
     end
   end

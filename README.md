@@ -33,8 +33,8 @@ TODO
 
 - capture a camping request/response
   x capture birth/death
-  - capture method calls
-  - whitelist api
+  x capture method calls
+  x whitelist api
   - change delimiter from `:'
 - watch should ignore non-events
 - draw class names over figures

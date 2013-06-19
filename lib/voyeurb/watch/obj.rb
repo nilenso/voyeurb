@@ -21,5 +21,15 @@ module Watch
       @height - @y
     end
 
+    def on(event)
+      return case event.what
+             when "BORN"
+               NewObj.new(obj_id)
+             when "CALL"
+               CallObj.new(obj_id, self)
+             when "DIED"
+               DeadObj.new(obj_id, self)
+             end
+    end
   end
 end

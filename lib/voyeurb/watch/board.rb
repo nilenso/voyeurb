@@ -24,10 +24,7 @@ module Watch
 
     def draw_population
       return unless @population
-      @population.each do |obj|
-        next_state = obj.draw_on(self)
-        @population.replace(next_state)
-      end
+      @population.each {|obj| @population.update(obj.draw_on(self)) }
     end
 
     def replay(file)
