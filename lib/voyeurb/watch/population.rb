@@ -9,16 +9,6 @@ module Watch
       old_obj = @objs[event.obj_id]
       new_obj = event.to_obj(old_obj)
       @objs[event.obj_id] = new_obj
-      # if event.died?
-      #   @objs[event.object_id].kill
-      # elsif event.called?
-      #   @objs[event.object_id].call_method(event.class) #actually, method.
-      # else
-      #   @objs[event.object_id] = event
-      # end
-      p new_obj
-      p @objs
-      puts ""
     end
 
     def each(&block)
