@@ -6,8 +6,9 @@ module Watch
       super(obj_id)
     end
 
-    def move
-      move_up
+    def draw_on(board)
+      board.fill(30, 102, 130)
+      board.rect(draw_x, draw_y, 16, 16)
     end
 
     def calling?

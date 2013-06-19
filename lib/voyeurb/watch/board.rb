@@ -6,8 +6,7 @@ module Watch
 
     def setup
       @population = nil
-      alpha = 0.5
-      @background = [0.06, 0.03, 0.18, alpha]
+      @background = [0.06, 0.03, 0.18, alpha = 1.0]
       color_mode RGB, 1
       ellipse_mode CORNER
       smooth
@@ -20,18 +19,12 @@ module Watch
 
     def draw
       draw_background
-      fill(204, 102, 0)
       draw_population
     end
 
     def draw_population
       return unless @population
-      @population.each do |obj|
-        # TODO: make objects responsible for rendering
-        obj.move
-        rect(obj.draw_x, obj.draw_y, 16, 16) if obj.calling?
-        ellipse(obj.draw_x, obj.draw_y, 32, 32) unless obj.calling?
-      end
+      @population.each {|obj| obj.draw_on(self) }
     end
 
     def replay(file)

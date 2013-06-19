@@ -6,12 +6,16 @@ module Watch
       super(obj_id)
     end
 
-    def move
+    def draw_on(board)
       move_down
+      board.fill(64, 64, 64)
+      board.ellipse(draw_x, draw_y, 32, 32)
     end
 
-    def calling?
-      false
+    def move_down
+      @x = @x + 1
+      @y = @y - 1
     end
+
   end
 end
