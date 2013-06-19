@@ -29,8 +29,8 @@ module Watch
       @population.each do |obj|
         # TODO: make objects responsible for rendering
         obj.move
-        rect(obj.x, obj.y, 16, 16) if obj.calling?
-        ellipse(obj.x, obj.y, 32, 32) unless obj.calling?
+        rect(obj.draw_x, obj.draw_y, 16, 16) if obj.calling?
+        ellipse(obj.draw_x, obj.draw_y, 32, 32) unless obj.calling?
       end
     end
 

@@ -1,20 +1,27 @@
 module Watch
   class Obj
 
-    attr_accessor :x
+    attr_accessor :obj_id, :x, :y
 
-    def initialize
+    def initialize(obj_id)
       @width = Board::WIDTH
       @height = Board::HEIGHT
-      @x = 0
-      @y = 0
+      @obj_id = obj_id
     end
 
-    def y
+    def draw_x
+      x
+    end
+
+    def draw_y # upside-down
       @height - @y
     end
 
     def move
+      raise "not implemented"
+    end
+
+    def calling?
       raise "not implemented"
     end
 
@@ -34,32 +41,6 @@ module Watch
     def move_down
       @x = @x + 1
       @y = @y - 1
-    end
-
-    def calling?
-      false
-    end
-  end
-
-  class New < Obj
-    def move
-      move_up
-    end
-  end
-
-  class Dead < Obj
-    def move
-      move_down
-    end
-  end
-
-  class Calling < Obj
-    def move
-      move_up
-    end
-
-    def calling?
-      true
     end
   end
 end

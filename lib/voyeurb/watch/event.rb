@@ -1,54 +1,35 @@
 module Watch
   class Event
-    attr_accessor :at, :what, :class, :object_id, :x
+    attr_accessor :at, :what, :class, :obj_id, :x
 
-    def initialize(at, what, name, object_id)
+    def initialize(at, what, name, obj_id)
       @at = at
       @what = what
       @name = name
-      @object_id = object_id
+      @obj_id = obj_id
     end
 
     def self.from(line)
-      parts = line.split(":")
+      parts = line.strip.split(":")
       at = parts[0].to_i # microseconds
       what = parts[1]    # BORN or DIED
       name = parts[2]
-      object_id = parts[3]
+      obj_id = parts[3]
       case what
       when "BORN"
-        Born.new(at, what, name, object_id)
+        BornEvent.new(at, what, name, obj_id)
       when "CALL"
-        Call.new(at, what, name, object_id)
+        CallEvent.new(at, what, name, obj_id)
       when "DIED"
-        Died.new(at, what, name, object_id)
+        DiedEvent.new(at, what, name, obj_id)
       end
     end
 
     def normalize(epoch)
-      magic_speedup = 100
+      magic_speedup = 200
       not_zero = 0.1
       @at = (@at - epoch) / magic_speedup + not_zero
       self
     end
   end
-
-  class Born < Event
-    def to_obj
-      New.new
-    end
-  end
-
-  class Died < Event
-    def to_obj
-      Dead.new
-    end
-  end
-
-  class Call < Event
-    def to_obj
-      Calling.new
-    end
-  end
-
 end

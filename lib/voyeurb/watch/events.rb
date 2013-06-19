@@ -29,7 +29,8 @@ module Watch
     end
 
     def fire(event)
-      @callback.call(event.to_obj)
+      p event
+      @callback.call(event)
       #    p @population
       schedule_next
     end

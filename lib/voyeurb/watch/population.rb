@@ -5,8 +5,10 @@ module Watch
       @events = Events.create_from(file) {|event| alter(event) }
     end
 
-    def alter(obj)
-      @objs[obj.object_id] = obj
+    def alter(event)
+      old_obj = @objs[event.obj_id]
+      new_obj = event.to_obj(old_obj)
+      @objs[event.obj_id] = new_obj
       # if event.died?
       #   @objs[event.object_id].kill
       # elsif event.called?
@@ -14,6 +16,9 @@ module Watch
       # else
       #   @objs[event.object_id] = event
       # end
+      p new_obj
+      p @objs
+      puts ""
     end
 
     def each(&block)

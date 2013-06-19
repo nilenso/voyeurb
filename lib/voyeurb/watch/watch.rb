@@ -14,8 +14,14 @@ require 'timers'
 
 $LOAD_PATH << File.dirname(__FILE__)
 require 'obj'
+require 'new_obj'
+require 'call_obj'
+require 'dead_obj'
 require 'population'
 require 'event'
+require 'born_event'
+require 'call_event'
+require 'died_event'
 require 'events'
 require 'board'
 
