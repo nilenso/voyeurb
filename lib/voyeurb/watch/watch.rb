@@ -13,6 +13,7 @@ $LOAD_PATH << File.dirname(__FILE__) + "/../../../vendor/gems/timers-1.1.0/lib"
 require 'timers'
 
 $LOAD_PATH << File.dirname(__FILE__)
+require 'obj'
 require 'population'
 require 'event'
 require 'events'

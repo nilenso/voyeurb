@@ -29,7 +29,7 @@ module Watch
     end
 
     def fire(event)
-      @callback.call(event)
+      @callback.call(event.to_obj)
       #    p @population
       schedule_next
     end
@@ -37,7 +37,7 @@ module Watch
     def self.parse_file(file)
       events = []
       File.open(file) do |f|
-        f.each {|line| events << Event.new(line) }
+        f.each {|line| events << Event.from(line) }
       end
       events
     end
