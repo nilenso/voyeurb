@@ -1,15 +1,17 @@
 module Watch
   class CallObj < Obj
-    def initialize(obj_id, old)
+    def initialize(obj_id, name, method, old)
+      @method = method
       @x = old.x
       @y = old.y
       @flashes = 0
-      super(obj_id)
+      super(obj_id, name)
     end
 
     def draw_on(board)
       animate(board)
-      board.rect(draw_x, draw_y, 16, 16)
+      board.rect(draw_x, draw_y, 32, 32)
+      board.text(@method, draw_x, draw_y)
       next_state
     end
 
@@ -20,7 +22,7 @@ module Watch
     end
 
     def next_state
-      @flashes > 100 ? NewObj.new(obj_id) : self
+      @flashes > 50 ? NewObj.new(obj_id, name) : self
     end
 
     def flash?

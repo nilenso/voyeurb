@@ -38,10 +38,10 @@ x capture a camping request/response
   x change delimiter from `:'
 x watch should ignore non-events
 x normalize event timings
-- draw class names over figures
-- method calls should:
+x draw class names over figures
+x method calls should:
   x flash
-  - display method name
+  x display method name
 - render objects
   - born = up
   - died = down

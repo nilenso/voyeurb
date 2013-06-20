@@ -2,7 +2,7 @@ module Watch
   class Event
     MARKER = "VOYEURB~"
 
-    attr_accessor :at, :what, :class, :obj_id, :delay
+    attr_accessor :at, :what, :name, :obj_id, :delay
 
     def initialize(at, what, name, obj_id, delay = 0)
       @at = at

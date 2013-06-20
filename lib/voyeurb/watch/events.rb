@@ -53,7 +53,7 @@ module Watch
     end
 
     def self.hann(events)
-      debug_delays("hanned:", events.map {|e| e.hann(events.length) }) 
+      debug_delays("hanned:", events.map {|e| e.hann(events.length) })
     end
 
     def self.debug_delays(label, events)

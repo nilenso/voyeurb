@@ -1,15 +1,16 @@
 module Watch
   class NewObj < Obj
-    def initialize(obj_id)
+    def initialize(obj_id, name)
       @x = 0
       @y = 0
-      super(obj_id)
+      super(obj_id, name)
     end
 
     def draw_on(board)
       move_up
       board.fill(204, 102, 0)
       board.ellipse(draw_x, draw_y, 32, 32)
+      board.text(name, draw_x, draw_y)
       self
     end
 
