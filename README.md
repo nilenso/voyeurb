@@ -14,6 +14,7 @@ Setup
 =====
 
     rbenv local 2.0.0-p195
+    gem install camping
     gem install bundler
     bundle
     ./capture.sh
