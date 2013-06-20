@@ -21,7 +21,7 @@ module Watch
     end
 
     def next_state
-      @flashes > 50 ? NewObj.new(obj_id, name, @x, @y) : self
+      @flashes > 20 ? NewObj.new(obj_id, name, @x, @y) : self
     end
 
   end
