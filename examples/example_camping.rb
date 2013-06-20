@@ -30,7 +30,8 @@ end
 
 module Blog::Views
   def index
-    h1 "index"
+    # img :src => "/hacky-mouse-sketch.png"
+    h1 "Welcome. We see you."
   end
 
   def gc
