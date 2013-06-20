@@ -20,11 +20,11 @@ module Watch
     end
 
     def movesize_x
-      1.0 - (@x / @width)
+      (1.0 - (@x / @width)) / 4.0
     end
 
     def movesize_y
-      1.0 - (@y / @height)
+      (1.0 - (@y / @height)) / 4.0
     end
 
   end

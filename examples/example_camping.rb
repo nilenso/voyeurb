@@ -3,10 +3,11 @@ require_relative '../lib/voyeurb'
 
 Camping.goes :Blog
 
-Capture.capture_methods!.start("Rack::Request", "Rack::Response",
+Capture.capture_methods!.start(
                          "WEBrick::HTTPRequest", "WEBrick::HTTPResponse",
                          "URI::HTTP", "Blog::H",
                          "Blog::Controllers::Index", "Blog::Controllers::I")
+# "Rack::Request", "Rack::Response",
 
 # module Blog::Models
 #   class Post < Base; end

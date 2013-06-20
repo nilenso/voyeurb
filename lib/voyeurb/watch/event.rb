@@ -35,16 +35,16 @@ module Watch
       new_delay(delay.to_f)
     end
 
-    def squash(ceiling)
-      max_seconds = 2.0
-      delay = max_seconds * (@delay / ceiling)
-      new_delay(delay)
-    end
-
     def hann(big_n)
       numerator = 2 * Math::PI * @delay
       denominator = big_n - 1
       delay = 0.5 * (1.0 - Math.cos(numerator / denominator))
+      new_delay(delay)
+    end
+
+    def squash(ceiling)
+      max_seconds = 1.0
+      delay = max_seconds * (@delay / ceiling)
       new_delay(delay)
     end
 
