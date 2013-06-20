@@ -9,7 +9,7 @@ module Watch
     end
 
     def self.create_from(file, &block)
-      events = normalize(parse_file(file))
+      events = squash(normalize(parse_file(file)))
       Events.new(events, &block)
     end
 
@@ -18,8 +18,8 @@ module Watch
     def schedule_next
       next_event = @events.delete_at(0)
       return unless next_event
-      puts "next event in #{next_event.at} seconds."
-      @timers.after(next_event.at) { fire(next_event) }
+      puts "next event in #{next_event.delay} seconds."
+      @timers.after(next_event.delay) { fire(next_event) }
       wait
     end
 
@@ -42,9 +42,21 @@ module Watch
     end
 
     def self.normalize(events)
-      epoch = events[0].at
-      events.map {|e| e.normalize(epoch) }
+      debug_delays("unsquashed:", events.
+        map {|e| e.normalize(events[0]) }.
+        reduce([]) {|evs, e| evs << e.with_delay(evs.last) })
     end
 
+    def self.squash(events)
+      slowest = events.reduce {|ceil, e| e.max(ceil) }
+      debug_delays("final:", events.map {|e| e.squash(slowest.delay) })
+    end
+
+    def self.debug_delays(label, events)
+      puts ""
+      puts label
+      p events.map {|e| e.delay}
+      events
+    end
   end
 end

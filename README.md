@@ -37,6 +37,7 @@ x capture a camping request/response
   x whitelist api
   x change delimiter from `:'
 x watch should ignore non-events
+- normalize event timings
 - draw class names over figures
 - method calls should:
   - flash

@@ -2,13 +2,14 @@ module Watch
   class Event
     MARKER = "VOYEURB~"
 
-    attr_accessor :at, :what, :class, :obj_id, :x
+    attr_accessor :at, :what, :class, :obj_id, :delay
 
-    def initialize(at, what, name, obj_id)
+    def initialize(at, what, name, obj_id, delay = 0)
       @at = at
       @what = what
       @name = name
       @obj_id = obj_id
+      @delay = delay
     end
 
     def self.from(line)
@@ -21,11 +22,24 @@ module Watch
       Event.new(at, what, name, obj_id)
     end
 
-    def normalize(epoch)
-      magic_speedup = 200
-      not_zero = 0.1
-      @at = (@at - epoch) / magic_speedup + not_zero
-      self
+    def normalize(genesis)
+      Event.new(@at - genesis.at, @what, @name, @obj_id)
+    end
+
+    def with_delay(prev)
+      delay = prev.nil? ? 1.0 : @at - prev.at
+      Event.new(@at, @what, @name, @obj_id, delay.to_f)
+    end
+
+    def squash(ceiling)
+      max_seconds = 2.0
+      delay = max_seconds * (@delay / ceiling)
+      Event.new(@at, @what, @name, @obj_id, delay)
+    end
+
+    def max(other)
+      @delay > other.delay ? self : other
     end
   end
+
 end
