@@ -1,8 +1,8 @@
 module Watch
   class NewObj < Obj
-    def initialize(obj_id, name)
-      @x = 0
-      @y = 0
+    def initialize(obj_id, name, x = 0, y = 0)
+      @x = x
+      @y = y
       super(obj_id, name)
     end
 

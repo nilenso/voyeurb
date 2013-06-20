@@ -16,17 +16,12 @@ module Watch
     end
 
     def animate(board)
-      color = flash? ? [30, 102, 130] : [255, 0, 0]
-      board.fill(*color)
+      board.fill(200, 0, 0)
       @flashes += 1
     end
 
     def next_state
-      @flashes > 50 ? NewObj.new(obj_id, name) : self
-    end
-
-    def flash?
-      @flashes % 2 == 0
+      @flashes > 50 ? NewObj.new(obj_id, name, @x, @y) : self
     end
 
   end

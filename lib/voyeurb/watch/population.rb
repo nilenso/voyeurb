@@ -6,6 +6,7 @@ module Watch
     end
 
     def alter(event)
+      p event
       old = @objs[event.obj_id] || NewObj.new(event.obj_id, event.name)
       @objs[old.obj_id] = old.on(event)
     end

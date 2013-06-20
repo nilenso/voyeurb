@@ -31,6 +31,7 @@ This crap is written in ruby 2.0. Processing is JRuby. Have both.
 TODO
 ====
 
+- fix concurrency bug in Population (some objs never die)
 x capture a camping request/response
   x capture birth/death
   x capture method calls
