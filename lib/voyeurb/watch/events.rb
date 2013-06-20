@@ -9,7 +9,7 @@ module Watch
     end
 
     def self.create_from(file, &block)
-      events = squash(normalize(parse_file(file)))
+      events = squash(hann(normalize(parse_file(file))))
       Events.new(events, &block)
     end
 
@@ -43,13 +43,17 @@ module Watch
 
     def self.normalize(events)
       debug_delays("unsquashed:", events.
-        map {|e| e.normalize(events[0]) }.
-        reduce([]) {|evs, e| evs << e.with_delay(evs.last) })
+            map {|e| e.normalize(events[0]) }.
+            reduce([]) {|evs, e| evs << e.with_delay(evs.last) })
     end
 
     def self.squash(events)
       slowest = events.reduce {|ceil, e| e.max(ceil) }
       debug_delays("final:", events.map {|e| e.squash(slowest.delay) })
+    end
+
+    def self.hann(events)
+      debug_delays("hanned:", events.map {|e| e.hann(events.length) }) 
     end
 
     def self.debug_delays(label, events)

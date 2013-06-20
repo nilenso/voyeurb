@@ -22,24 +22,35 @@ module Watch
       Event.new(at, what, name, obj_id)
     end
 
+    def new_delay(delay)
+      Event.new(@at, @what, @name, @obj_id, delay)
+    end
+
     def normalize(genesis)
       Event.new(@at - genesis.at, @what, @name, @obj_id)
     end
 
     def with_delay(prev)
       delay = prev.nil? ? 1.0 : @at - prev.at
-      Event.new(@at, @what, @name, @obj_id, delay.to_f)
+      new_delay(delay.to_f)
     end
 
     def squash(ceiling)
       max_seconds = 2.0
       delay = max_seconds * (@delay / ceiling)
-      Event.new(@at, @what, @name, @obj_id, delay)
+      new_delay(delay)
+    end
+
+    def hann(big_n)
+      numerator = 2 * Math::PI * @delay
+      denominator = big_n - 1
+      delay = 0.5 * (1.0 - Math.cos(numerator / denominator))
+      new_delay(delay)
     end
 
     def max(other)
       @delay > other.delay ? self : other
     end
-  end
 
+  end
 end
